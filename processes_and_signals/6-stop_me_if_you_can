@@ -1,3 +1,12 @@
-#!/usr/bin/env bash 
-#script
-pkill -f "4-to_infinity_and_beyond"
+#!/usr/bin/env bash
+# scripty
+
+
+PID=$(pgrep -x "4-to_infinity_and_beyond")
+
+
+if [ -n "$PID" ]; then
+    
+    python3 -c "import os, signal; os.kill($PID, signal.SIGTERM)"
+fi
+
