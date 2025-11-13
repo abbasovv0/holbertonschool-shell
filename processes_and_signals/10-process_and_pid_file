@@ -1,13 +1,32 @@
 #!/usr/bin/env bash
-#script
-echo $$ > /var/run/myscript.pid
+# script
 
-trap 'echo "I hate the kill command"; rm -f /var/run/myscript.pid; exit' SIGTERM
-trap 'echo "Y U no love me?!"; rm -f /var/run/myscript.pid; exit' SIGINT
-trap 'rm -f /var/run/myscript.pid; exit' SIGQUIT
+set -euo pipefail
 
-while true
-do
-    echo "To infinity and beyond"
+pidfile=/var/run/myscript.pid
+printf '%s\n' "$$" > "$pidfile"
+
+term_handler() {
+    printf '%s\n' "I hate the kill command"
+    rm -f -- "$pidfile"
+    exit 0
+}
+
+quit_handler() {
+    rm -f -- "$pidfile"
+    exit 0
+}
+
+int_handler() {
+    printf '%s\n' "Y U no love me?!"
+}
+
+trap 'term_handler' SIGTERM
+trap 'quit_handler' SIGQUIT
+trap 'int_handler' SIGINT
+
+while true; do
+    printf '%s\n' "To infinity and beyond"
     sleep 2
 done
+
