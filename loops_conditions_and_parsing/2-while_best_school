@@ -1,5 +1,6 @@
 #!/bin/bash
-count=1
+# a Bash script that displays Best School 10 times.
+count=0
 while [ $count -le 10 ]
 do
   echo "Best School"
