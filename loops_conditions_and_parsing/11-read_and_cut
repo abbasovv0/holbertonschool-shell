@@ -1,6 +1,7 @@
 #!/usr/bin/env bash 
 #etc/passwd
-while IFS=: read -r username uid home_dir;
+while IFS=":" read -r username password userid groupid comment homedir shell
 do
-  echo "$username:$uid:$home_dir"
+  echo "$username:$userid:$homedir"
 done < /etc/passwd
+
