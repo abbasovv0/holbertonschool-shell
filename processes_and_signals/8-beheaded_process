@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 #script
-PID=$(pgrep -x "7-highlander")
+PID=$(pgrep -f "7-highlander")
 if [ -n "$PID" ]; then
-    python3 -c "import os, signal; os.kill($PID, signal.SIGTERM)"
+    python3 - <<EOF
+import os, signal
+os.kill(int("$PID"), signal.SIGTERM)
+EOF
 fi
+
