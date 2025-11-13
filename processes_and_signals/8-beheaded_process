@@ -2,9 +2,7 @@
 #script
 PID=$(pgrep -f "7-highlander")
 if [ -n "$PID" ]; then
-    python3 - <<EOF
-import os, signal
-os.kill(int("$PID"), signal.SIGTERM)
-EOF
+    perl -e "kill 'TERM', $PID"
 fi
+
 
