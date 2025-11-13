@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#for_ls
+for ls in *; 
+do
+if [[ $ls == *-* ]]; 
+then 
+	echo "${ls#*-}"
+else
+    echo "$ls"
+fi 
+done
