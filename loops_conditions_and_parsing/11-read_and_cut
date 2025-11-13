@@ -1,7 +1,5 @@
-#!/usr/bin/env bash 
-#etc/passwd
-while IFS=":" read -r username password userid groupid comment homedir shell
-do
-  echo "$username:$userid:$homedir"
-done < /etc/passwd
+#!/usr/bin/env bash
+#this is script
+line=/etc/passwd
+while read -r line; do echo "$line" | cut -d: -f1,3,6; done < '/etc/passwd'
 
