@@ -1,11 +1,3 @@
 #!/usr/bin/env bash
-# Script
-
-log_file="${1:-}"
-
-if [ ! -f "$log_file" ]; then
-    echo "Usage: $0 log_file" >&2
-    exit 1
-fi
-
-awk '{count[$1" "$9]++} END {for (i in count) print count[i], i}' "$log_file" | sort -nr
+#script
+awk '{print $1,$9}'  apache-access.log | sort | uniq -c | sort -nr 
