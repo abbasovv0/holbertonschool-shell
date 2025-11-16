@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
-# Script that groups visitors by IP and HTTP status code, sorted by occurrences
+#script
+if [ $# -eq 0 ] || [ ! -f "$1" ]; then
+    echo "Usage: $0 log_file" >&2
+    exit 1
+fi
 
+# Process log file
 awk '{count[$1" "$9]++} END {for (i in count) print count[i], i}' "$1" | sort -nr
+
